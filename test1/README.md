@@ -98,7 +98,7 @@ Once you have completed as many of the challenges as you can, please create a Pu
 
 #### Footnote: Useful Vagrant Commands
 ```
-vagrant up 			# Starts the Vagrant VMs
-vagrant halt 		# Shuts down the vagrant machines.  Saves the state of the VMs
-vagrant destroy		# Shuts down and deletes the state of the VMs
+vagrant up    # Starts the Vagrant VMs
+vagrant halt    # Shuts down the vagrant machines.  Saves the state of the VMs
+vagrant destroy   # Shuts down and deletes the state of the VMs
 ```
