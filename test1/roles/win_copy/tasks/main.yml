@@ -1,0 +1,18 @@
+---
+
+# This role will copy each file listed from the local host to the remote machine.
+#
+# Wrapper for: https://docs.ansible.com/ansible/win_copy_module.html
+#
+# Example List:
+# win_copy_files_list:
+# - name: 'file1'
+#   src: '/path/on/host/to/file1'
+#   dest: 'c:\path\to\file1'
+#
+
+- name: Copy a file from the local host to the remote host
+  win_copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: "{{ win_copy_files_list }}"

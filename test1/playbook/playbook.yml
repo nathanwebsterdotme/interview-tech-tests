@@ -1,0 +1,59 @@
+---
+
+### The first task here sets up the connection between the Ansible node and the Windows target node.
+
+- name: Add the windows vagrant host
+  hosts: localhost
+
+  tasks:
+  - name: Add the windows host
+    add_host:
+      name: '10.75.75.101'
+      groups: 'windows_host'
+      ansible_user: 'vagrant'
+      ansible_password: "vagrant"
+      ansible_port: '5985'
+      ansible_connection: 'winrm'
+      ansible_winrm_server_cert_validation: 'ignore'
+      ansible_winrm_operation_timeout_sec: 60
+      ansible_winrm_read_timeout_sec: 70
+
+
+### The following tasks are run on the target node to configure it.
+
+- name: Configure a windows web Web-Server
+  hosts: windows_host
+
+  vars:
+    win_feature_list:
+    - 'NET-Framework-Features'
+    - 'NET-Framework-Core'
+    - 'NET-Framework-45-Features'
+    - 'NET-Framework-45-Core'
+    - 'NET-Framework-45-ASPNET'
+    - 'Web-Server'
+    - 'Web-App-Dev'
+    - 'Web-Net-Ext'
+    - 'Web-Net-Ext45'
+    - 'NET-WCF-Services45'
+    - 'Web-AppInit'
+    - 'Web-Asp-Net'
+    - 'Web-Asp-Net45'
+    - 'Web-Mgmt-Tools'
+    - 'Web-Mgmt-Console'
+    - 'Web-Scripting-Tools'
+
+    win_iis_webapppool_list:
+    - name: 'test1'
+      state: 'started'
+
+    win_file_folder_list:
+    - path: 'c:\websites'
+      state: 'directory'
+    - path: 'c:\websites\test1'
+      state: 'directory'
+
+  roles:
+    - role: win_feature
+    - role: win_iis_webapppool
+    - role: win_file

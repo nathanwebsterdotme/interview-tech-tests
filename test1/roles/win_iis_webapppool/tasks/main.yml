@@ -1,0 +1,12 @@
+---
+
+# Configures Windows IIS web app pools on the target node.
+#
+# Module configuration options can be found here: https://docs.ansible.com/ansible/win_iis_webapppool_module.html
+
+- name: Create / Delete a list of Windows IIS App Pools
+  win_iis_webapppool:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default ('started') }}"
+    attributes: "{{ item.attributes | default (omit) }}"  # Optional iis app pool attributes.  Omits this if nothing is provided
+  with_items: "{{ win_iis_webapppool_list }}"

@@ -1,0 +1,9 @@
+---
+
+# Ansible Module: https://docs.ansible.com/ansible/win_file_module.html
+
+- name: Creates/Deletes a file/folder
+  win_file:
+    path: "{{ item.path }}"   # Path on the target node
+    state: "{{ item.state }}"   # Valid options: 'file', 'directory', 'touch', 'absent'
+  with_items: "{{ win_file_folder_list }}"

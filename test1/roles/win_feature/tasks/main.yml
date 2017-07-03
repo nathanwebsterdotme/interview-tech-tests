@@ -1,0 +1,11 @@
+---
+# Installs Windows Features to the target machine
+#
+# Ansible Module: https://docs.ansible.com/ansible/win_feature_module.html
+
+- name: Install Windows Features
+  win_feature:
+    name: "{{ item }}"
+    include_management_tools: true
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ win_feature_list }}"
