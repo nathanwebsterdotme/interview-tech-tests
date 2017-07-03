@@ -35,16 +35,18 @@ VM, run `vagrant status NAME`.
 
 #### Vagrant VMs Details
 Vagrant Machines:
+
+```
 "ansible"
 ip: 10.75.75.75
 os: Ubuntu 16.04
 role: Ansible build server
 
-2. "winweb"
+"winweb"
 ip: 10.75.75.101
 os: Windows 2012R2
 role: Windows web server.  Our target node.
-
+```
 
 ## Running the playbook
 OK, so now we have 2 VMs running.  One Ansible Build server, and one Windows target node.
