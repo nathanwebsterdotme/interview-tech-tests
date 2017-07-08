@@ -11,8 +11,9 @@
 #   dest: 'c:\path\to\file1'
 #
 
-- name: Copy a file from the local host to the remote host
-  win_copy:
-    src: "interview-tech-tests/test1/files"
-    dest: 'c:\websites\test1'
-  with_items: "index.html"
+
+# win_copy_files_list:
+ - name: file1
+   win_copy:
+     src: '/vagrant/files'
+     dest: 'c:\websites\test1'

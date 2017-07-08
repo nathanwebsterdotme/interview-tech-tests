@@ -18,9 +18,7 @@
       ansible_winrm_operation_timeout_sec: 60
       ansible_winrm_read_timeout_sec: 70
 
-
 ### The following tasks are run on the target node to configure it.
-
 - name: Configure a windows web Web-Server
   hosts: windows_host
 
@@ -44,17 +42,11 @@
     - 'Web-Scripting-Tools'
     - 'FileAndStorage-Services'
 
-
-  #  - name: Install IIS (Web-Server only)
-  #    win_feature:
-  #    name: Web-Server
-  ##    state: present
-
     win_iis_webapppool_list:
     - name: 'test1'
       state: 'started'
-    win_iis_webapppool:
-      -name: 'challenge2'
+    win_iis_webapppool_list:
+    - name: 'challenge2'
       attributes: 'managedRuntimeVersion:v2.0'
       state: 'started'
 
@@ -68,5 +60,5 @@
     - role: win_feature
     - role: win_iis_webapppool
     - role: win_file
-    - role: win_copy
     - role: win_iis_website
+    - role: win_copy
