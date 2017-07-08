@@ -42,9 +42,20 @@
     - 'Web-Mgmt-Tools'
     - 'Web-Mgmt-Console'
     - 'Web-Scripting-Tools'
+    - 'FileAndStorage-Services'
+
+
+  #  - name: Install IIS (Web-Server only)
+  #    win_feature:
+  #    name: Web-Server
+  ##    state: present
 
     win_iis_webapppool_list:
     - name: 'test1'
+      state: 'started'
+    win_iis_webapppool:
+      -name: 'challenge2'
+      attributes: 'managedRuntimeVersion:v2.0'
       state: 'started'
 
     win_file_folder_list:
@@ -57,3 +68,5 @@
     - role: win_feature
     - role: win_iis_webapppool
     - role: win_file
+    - role: win_copy
+    - role: win_iis_website

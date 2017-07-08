@@ -13,6 +13,6 @@
 
 - name: Copy a file from the local host to the remote host
   win_copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items: "{{ win_copy_files_list }}"
+    src: "interview-tech-tests/test1/files"
+    dest: 'c:\websites\test1'
+  with_items: "index.html"
