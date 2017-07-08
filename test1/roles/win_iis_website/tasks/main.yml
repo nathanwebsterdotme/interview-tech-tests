@@ -5,7 +5,7 @@
       state: started
       port: 80
       ip: 127.0.0.1
-      hostname: winweb
+      hostname: localhost
       application_pool: "test1"
       physical_path: 'c:\websites\test1'
     register: website
