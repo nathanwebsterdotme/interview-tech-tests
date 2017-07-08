@@ -1,0 +1,17 @@
+  #win_iis_website:
+-   name: 'test1'
+    win_iis_website:
+      name: "test1"
+      state: started
+      port: 80
+      ip: 127.0.0.1
+      hostname: winweb
+      application_pool: "test1"
+      physical_path: 'c:\websites\test1'
+    register: website
+
+
+- name: Remove Default Web Site
+  win_iis_website:
+    name: "Default Web Site"
+    state: absent
