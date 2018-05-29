@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Interview Tech Test - Linux Web Server
+
+require 'yaml'
+
+Vagrant.configure("2") do |config|
+
+    config.vm.define "ansible" do |ansible|
+    # Ansible Build Server
+        ansible.vm.box = "ubuntu/xenial64"
+        ansible.vm.hostname = "ansible"
+        ansible.vm.network "private_network", ip: "10.75.75.75"
+        ansible.vm.provision "file", source: "keys/testkey", destination: "~/.ssh/testkey"
+        ansible.vm.provision "shell", inline: "apt-get update"
+        ansible.vm.provision "shell", inline: "apt-get install git python-setuptools libssl-dev build-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev -y"
+        ansible.vm.provision "shell", inline: "easy_install pip"
+        ansible.vm.provision "shell", inline: "pip install setuptools paramiko PyYAML Jinja2 httplib2 six cryptography ansible pywinrm"
+    end
+
+
+    config.vm.define "linuxweb" do |linuxweb|
+    # Vagrant Target Machine - Linux Webserver
+        linuxweb.vm.box = "ubuntu/xenial64"
+        linuxweb.vm.hostname = "linuxweb"
+        linuxweb.vm.network "private_network", ip: "10.75.75.101"
+        linuxweb.vm.provision "file", source: "keys/testkey.pub", destination: "~/.ssh/authorized_keys"
+        linuxweb.ssh.private_key_path = ["keys/testkey", "~/.vagrant.d/insecure_private_key"]
+        linuxweb.ssh.insert_key = false
+        linuxweb.vm.provision "shell", inline: "apt-get update"
+        linuxweb.vm.provision "shell", inline: "apt-get install git python-setuptools libssl-dev build-essential autoconf libtool pkg-config python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev nano -y"
+    end
+end

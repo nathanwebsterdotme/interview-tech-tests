@@ -1,0 +1,27 @@
+---
+
+### The first task here sets up the connection between the Ansible node and the linux target node.
+
+- name: Add the linux vagrant host
+  hosts: localhost
+
+  tasks:
+  - name: Add the Linux Web Server host
+    add_host:
+      name: '10.75.75.101'
+      groups: 'linux_host'
+      ansible_ssh_private_key_file: '~/.ssh/testkey'
+
+
+### The following tasks are run on the target node to configure it.
+
+- name: Configure a linux webserver
+  hosts: linux_host
+  become: true
+
+  vars:
+    apt_packages:
+    - curl
+
+  roles:
+    - role: apt
