@@ -22,6 +22,11 @@
   vars:
     apt_packages:
     - curl
+    - python-pip
+    pip_libraries:
+    - jinja2
+    - paramiko
 
   roles:
     - role: apt
+    - role: pip
