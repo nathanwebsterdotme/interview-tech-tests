@@ -1,0 +1,12 @@
+---
+
+# This role installs Pyton libraries using pip. Libraries are listed in the "pip_libraries" variable tree.
+#
+# Wrapper for: http://docs.ansible.com/ansible/latest/modules/pip_module.html
+#
+
+- name: Install python libraries using pip
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ pip_libraries }}"
