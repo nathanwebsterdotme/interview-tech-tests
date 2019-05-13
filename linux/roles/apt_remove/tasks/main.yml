@@ -1,0 +1,13 @@
+---
+
+# This role removes apt packages listed in the "apt_remove_packages" variable tree.
+#
+# Wrapper for: http://docs.ansible.com/ansible/latest/modules/apt_module.html
+#
+
+- name: Removes apt packages
+  apt:
+    name: "{{ item }}"
+    update_cache: false
+    state: absent
+  with_items: "{{ apt_remove_packages }}"

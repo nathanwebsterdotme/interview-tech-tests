@@ -23,10 +23,13 @@
     apt_packages:
     - curl
     - python-pip
+    apt_remove_packages:
+    - nano
     pip_libraries:
     - jinja2
     - paramiko
 
   roles:
     - role: apt
+    - role: apt_remove
     - role: pip
