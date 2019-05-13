@@ -1,0 +1,17 @@
+---
+
+# This role installs nginx and configures it to serve files from the directory specified in "http_root".
+
+- name: Install and configure nginx
+  block:
+    - include_role:
+        name: apt
+      vars:
+        apt_packages:
+          - nginx
+    - template:
+        src: ../config_templates/nginx_default_site.j2
+        dest: /etc/nginx/sites-enabled/default
+    - service:
+        name: nginx
+        state: reloaded

@@ -28,8 +28,10 @@
     pip_libraries:
     - jinja2
     - paramiko
+    http_root: /vagrant/files
 
   roles:
     - role: apt
     - role: apt_remove
     - role: pip
+    - role: nginx_install
